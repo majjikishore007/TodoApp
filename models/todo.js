@@ -1,19 +1,20 @@
 const mongoose = require("mongoose");
-
-
+const { ObjectId } = mongoose.Schema;
 const todoSchema = new mongoose.Schema(
   {
     name: {
       type: String,
       required: true,
       trim: true,
-      maxlength: 32,
     },
     description: {
       type: String,
       required: true,
       trim: true,
-      maxlength: 60,
+    },
+    user: {
+      type: ObjectId,
+      ref: "User",
     },
   },
   { timestamps: true }
