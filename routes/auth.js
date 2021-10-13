@@ -33,7 +33,8 @@ router.post(
 
 /**
  * @description
- *
+ * email must be a valid one 
+ * password mmust be a valid one 
  */
 router.post(
   "/signin",

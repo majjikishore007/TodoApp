@@ -77,6 +77,7 @@ exports.signin = (req, res) => {
   });
 };
 exports.signout = (req, res) => {
+  console.log("Signout");
   res.clearCookie("token");
   res.json({
     message: "User Signout Sucess",
@@ -93,7 +94,6 @@ exports.isSignedIn = expressJwt({
 //middleware custom
 
 exports.isAuthenticated = (req, res, next) => {
-  // console.log("Authentication", req.profile);
   let checker = req.profile && req.auth && req.profile._id == req.auth._id;
   if (!checker) {
     return res.status(404).json({

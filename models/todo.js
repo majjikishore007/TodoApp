@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { ObjectId } = mongoose.Schema;
 const todoSchema = new mongoose.Schema(
   {
     name: {
@@ -12,9 +11,15 @@ const todoSchema = new mongoose.Schema(
       required: true,
       trim: true,
     },
-    user: {
-      type: ObjectId,
-      ref: "User",
+    status: {
+      type: String,
+      default: "NotDone",
+      //using enums
+      enum: ["Done", "NotDone", "InProgress"],
+    },
+    updated: Date,
+    userId: {
+      type: String,
     },
   },
   { timestamps: true }

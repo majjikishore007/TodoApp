@@ -30,7 +30,5 @@ router.delete("/todo/:todoId/:userId", isSignedIn, isAuthenticated, deleteTodo);
 
 router.put("/todo/:todoId/:userId", isSignedIn, isAuthenticated, updateTodo);
 
-//listing routes
-router.get("/todos/:userId", isSignedIn, isAuthenticated, getAllTodos);
 
 module.exports = router;

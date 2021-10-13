@@ -1,5 +1,5 @@
 const User = require("../models/user");
-const Todo = require("../models/user");
+const Todo = require("../models/todo");
 
 exports.getUserById = (req, res, next, id) => {
   User.findById(id).exec((err, user) => {
@@ -41,38 +41,12 @@ exports.updateUser = (req, res) => {
 };
 exports.userTodoList = (req, res) => {
   console.log("finding the todos");
-  Todo.find({ user: req.profile._id })
-    .populate("user", "_id name ")
-    .exec((err, todo) => {
-      if (err) {
-        return res.status(404).json({
-          error: "No todo is this account",
-        });
-      }
-      res.json(todo);
-    });
-};
-exports.pushTodoList = (req, res, next) => {
-  let todoList = [];
-  console.log("pushing todos", req.body);
-  todoList.push({
-    _id: Math.random() * 10,
-    name: req.name,
-    description: req.description,
-  });
-  //storing in db
-
-  User.findOneAndUpdate(
-    { _id: req.profile._id },
-    { $push: { todos: todoList } },
-    { new: true },
-    (err, todos) => {
-      if (err) {
-        return res.status(400).json({
-          error: "Unable to save the TODO line 72",
-        });
-      }
-      next();
+  var id = req.profile._id;
+  console.log(id);
+  Todo.find({ userId: id }).exec((err, todo) => {
+    if (err) {
+      console.log(err);
     }
-  );
+    res.json(todo);
+  });
 };
